@@ -1,14 +1,19 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
 from typing import List
-import uuid
-from datetime import datetime, timezone
+
+from models import (
+    ContactSubmission,
+    ContactSubmissionCreate,
+    OnboardingApplication,
+    OnboardingApplicationCreate
+)
+from email_service import send_contact_notification, send_onboarding_notification
 
 
 ROOT_DIR = Path(__file__).parent
@@ -25,46 +30,56 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "SPARK AI Hub API"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
+@api_router.post("/contact")
+async def submit_contact_form(contact_data: ContactSubmissionCreate):
+    """Handle contact form submission"""
+    try:
+        # Create contact submission object
+        contact_submission = ContactSubmission(**contact_data.model_dump())
+        
+        # Store in MongoDB
+        await db.contact_submissions.insert_one(contact_submission.model_dump())
+        
+        # Send email notification (non-blocking, don't fail if email fails)
+        email_result = await send_contact_notification(contact_data.model_dump())
+        
+        return {
+            "success": True,
+            "message": "Thank you for your interest! We'll contact you soon.",
+            "submission_id": contact_submission.id
+        }
+    except Exception as e:
+        logger.error(f"Error processing contact form: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process contact form")
+
+
+@api_router.post("/onboarding")
+async def submit_onboarding_application(application_data: OnboardingApplicationCreate):
+    """Handle onboarding application submission"""
+    try:
+        # Create onboarding application object
+        application = OnboardingApplication(**application_data.model_dump())
+        
+        # Store in MongoDB
+        await db.onboarding_applications.insert_one(application.model_dump())
+        
+        # Send email notification (non-blocking, don't fail if email fails)
+        email_result = await send_onboarding_notification(application_data.model_dump())
+        
+        return {
+            "success": True,
+            "message": "Your application has been submitted successfully! We'll be in touch shortly.",
+            "application_id": application.id
+        }
+    except Exception as e:
+        logger.error(f"Error processing onboarding application: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to process onboarding application")
 
 # Include the router in the main app
 app.include_router(api_router)

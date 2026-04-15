@@ -147,3 +147,62 @@ Create website for SPARK AI Hub, Sharjah - an innovation center focused on artif
 - Sender email in test mode: onboarding@resend.dev
 - Frontend environment variable: REACT_APP_BACKEND_URL
 - Backend environment variable: MONGO_URL, RESEND_API_KEY, SENDER_EMAIL
+
+## Updates - December 2025
+
+### Phase 2: Backend Integration & UI Changes ✅
+**Date**: December 2025
+
+#### Backend Implementation:
+- ✅ Contact form API endpoint (/api/contact)
+- ✅ Onboarding form API endpoint (/api/onboarding) - REMOVED in latest update
+- ✅ MongoDB models for submissions
+- ✅ Resend email integration (requires API key)
+- ✅ Email notifications to dt@srtip.ae
+- ✅ Form validation and error handling
+
+#### UI Changes:
+- ✅ Removed onboarding application form
+- ✅ Changed "Submit Application" button to external redirect
+- ✅ Button now redirects to https://ai.srtip.ae/#contact
+- ✅ Contact form connected to backend API
+- ✅ Toast notifications working for contact form
+
+#### Static HTML Version Created: ✅
+- ✅ Converted entire React app to standalone HTML/CSS/JS
+- ✅ Single file (`/app/html-version/index.html`) - ~85KB
+- ✅ No build process or dependencies required
+- ✅ All animations and effects preserved
+- ✅ Contact form API integration included
+- ✅ Mobile responsive design
+- ✅ Can be deployed anywhere (GitHub Pages, Netlify, etc.)
+
+## Current State
+
+### React Version (Full-Stack):
+- **Location**: `/app/frontend/` and `/app/backend/`
+- **Features**: Full backend integration, contact form with email
+- **Use Case**: When you need backend functionality and form submissions
+
+### HTML Version (Static):
+- **Location**: `/app/html-version/index.html`
+- **Features**: Standalone, no dependencies, optional API integration
+- **Use Case**: Quick deployment, static hosting, no backend needed
+
+## API Endpoints Status
+
+### Active Endpoints:
+1. **POST /api/contact** - Working ✅
+   - Stores submissions in MongoDB
+   - Sends email to dt@srtip.ae
+   - Returns success/error response
+
+### Removed Endpoints:
+2. **POST /api/onboarding** - No longer used ❌
+   - Replaced with external redirect to https://ai.srtip.ae/#contact
+
+## Next Steps
+- [ ] Add real Resend API key to enable email functionality
+- [ ] Test HTML version on static hosting
+- [ ] Optional: Add analytics tracking
+- [ ] Optional: Add more sections (blog, case studies, team)

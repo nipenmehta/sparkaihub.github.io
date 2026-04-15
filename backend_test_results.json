@@ -1,0 +1,100 @@
+{
+  "timestamp": "2026-04-14T19:18:49.967987",
+  "summary": {
+    "tests_run": 5,
+    "tests_passed": 5,
+    "success_rate": 100.0
+  },
+  "test_results": [
+    {
+      "test_name": "API Root",
+      "method": "GET",
+      "endpoint": "",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "message": "SPARK AI Hub API"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Contact Form Submission",
+      "method": "POST",
+      "endpoint": "contact",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "message": "Thank you for your interest! We'll contact you soon.",
+        "submission_id": "3c121ae5-d603-4cb3-a718-3da434364d41"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Onboarding Form Submission",
+      "method": "POST",
+      "endpoint": "onboarding",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "success": true,
+        "message": "Your application has been submitted successfully! We'll be in touch shortly.",
+        "application_id": "ff94acf1-8128-493b-a95b-0523a1844191"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Contact Form Validation (Invalid Data)",
+      "method": "POST",
+      "endpoint": "contact",
+      "expected_status": 422,
+      "actual_status": 422,
+      "success": true,
+      "response_data": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "email"
+            ],
+            "msg": "value is not a valid email address: An email address must have an @-sign.",
+            "input": "invalid-email",
+            "ctx": {
+              "reason": "An email address must have an @-sign."
+            }
+          }
+        ]
+      },
+      "error": null
+    },
+    {
+      "test_name": "Onboarding Form Validation (Invalid Data)",
+      "method": "POST",
+      "endpoint": "onboarding",
+      "expected_status": 422,
+      "actual_status": 422,
+      "success": true,
+      "response_data": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "email"
+            ],
+            "msg": "value is not a valid email address: An email address must have an @-sign.",
+            "input": "invalid-email",
+            "ctx": {
+              "reason": "An email address must have an @-sign."
+            }
+          }
+        ]
+      },
+      "error": null
+    }
+  ]
+}

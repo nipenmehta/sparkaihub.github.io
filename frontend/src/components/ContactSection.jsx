@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { mockContactSubmission } from '../mock/mockData';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -25,9 +28,9 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const result = await mockContactSubmission(formData);
-      if (result.success) {
-        toast.success(result.message);
+      const response = await axios.post(`${API}/contact`, formData);
+      if (response.data.success) {
+        toast.success(response.data.message);
         setFormData({
           name: '',
           email: '',
@@ -37,7 +40,8 @@ const ContactSection = () => {
         });
       }
     } catch (error) {
-      toast.error('Something went wrong. Please try again.');
+      console.error('Contact submission error:', error);
+      toast.error(error.response?.data?.detail || 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
