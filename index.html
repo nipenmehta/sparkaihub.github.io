@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARK AI Hub - Sharjah's Innovation Center for Artificial Intelligence</title>
+    <meta name="description" content="SPARK AI Hub is Sharjah's premier innovation center dedicated to advancing artificial intelligence, fostering collaboration, and driving technological excellence.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            color: #2563eb;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            color: #3b82f6;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        header.scrolled .logo-text {
+            color: #111827;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        header.scrolled nav a {
+            color: #374151;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(29, 78, 216, 0.85) 50%, rgba(17, 24, 39, 0.9) 100%);
+        }
+
+        .sparkle-container {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .sparkle-particle {
+            position: absolute;
+            animation: sparkle-float 4s ease-in-out infinite;
+            color: #93c5fd;
+        }
+
+        @keyframes sparkle-float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-100px) scale(1.2);
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+            animation: fade-in-up 1s ease-out;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .hero-divider-line {
+            height: 4px;
+            width: 80px;
+            background: linear-gradient(to right, transparent, #60a5fa, transparent);
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #bfdbfe;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: #e5e7eb;
+            max-width: 48rem;
+            margin: 0 auto 2rem;
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .scroll-indicator-box {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        .scroll-indicator-dot {
+            width: 4px;
+            height: 12px;
+            background: white;
+            border-radius: 2px;
+            animation: scroll-down 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-down {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+        }
+
+        /* Container and Section Styles */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .section-divider-line {
+            height: 4px;
+            width: 96px;
+            border-radius: 2px;
+        }
+
+        .section-divider-line.left {
+            background: linear-gradient(to right, transparent, #2563eb);
+        }
+
+        .section-divider-line.right {
+            background: linear-gradient(to left, transparent, #2563eb);
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(to bottom, white, #f9fafb);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image-container {
+            position: relative;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, transparent 100%);
+        }
+
+        .about-decorative-1 {
+            position: absolute;
+            bottom: -1.5rem;
+            right: -1.5rem;
+            width: 12rem;
+            height: 12rem;
+            background: #dbeafe;
+            border-radius: 1rem;
+            z-index: -1;
+        }
+
+        .about-decorative-2 {
+            position: absolute;
+            top: -1.5rem;
+            left: -1.5rem;
+            width: 8rem;
+            height: 8rem;
+            background: #eff6ff;
+            border-radius: 1rem;
+            z-index: -1;
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .about-content-divider {
+            height: 4px;
+            width: 6rem;
+            background: linear-gradient(to right, #2563eb, #60a5fa);
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            color: #374151;
+            margin-bottom: 1rem;
+            line-height: 1.75;
+        }
+
+        .about-content .mission-text {
+            color: #6b7280;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: #2563eb;
+            color: white;
+        }
+
+        .feature-icon {
+            padding: 0.25rem;
+            background: #dbeafe;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            color: #2563eb;
+        }
+
+        .feature-text {
+            color: #374151;
+            flex: 1;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateY(-8px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #2563eb, #60a5fa);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-image {
+            position: relative;
+            height: 12rem;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(17, 24, 39, 0.8) 0%, rgba(17, 24, 39, 0.4) 50%, transparent 100%);
+        }
+
+        .service-icon-wrapper {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+        }
+
+        .service-icon {
+            padding: 0.75rem;
+            background: #2563eb;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.5);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: #1d4ed8;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-title {
+            color: #2563eb;
+        }
+
+        .service-description {
+            color: #6b7280;
+            line-height: 1.625;
+            margin-bottom: 1rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: #1d4ed8;
+            gap: 0.75rem;
+        }
+
+        /* Onboarding Section */
+        #onboarding {
+            background: linear-gradient(to bottom, #f9fafb, white);
+        }
+
+        .onboarding-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .timeline-step {
+            position: relative;
+            text-align: center;
+        }
+
+        .timeline-connector {
+            display: none;
+            position: absolute;
+            top: 3rem;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #2563eb, #60a5fa);
+            z-index: 0;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-connector {
+                display: block;
+            }
+            .timeline-step:last-child .timeline-connector {
+                display: none;
+            }
+        }
+
+        .timeline-icon-wrapper {
+            position: relative;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 6rem;
+            height: 6rem;
+            background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+            border-radius: 50%;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.5);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-icon-wrapper:hover {
+            transform: scale(1.1);
+        }
+
+        .timeline-icon {
+            color: white;
+        }
+
+        .timeline-number {
+            position: absolute;
+            top: -0.5rem;
+            right: 50%;
+            transform: translateX(50%);
+            width: 2rem;
+            height: 2rem;
+            background: white;
+            border: 4px solid #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: #6b7280;
+        }
+
+        .application-cta {
+            max-width: 42rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .application-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            border: 1px solid #f3f4f6;
+        }
+
+        .application-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .application-card p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(to bottom, white, #f9fafb);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-info-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-info-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon-wrapper {
+            padding: 0.75rem;
+            background: #dbeafe;
+            border-radius: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon {
+            color: #2563eb;
+        }
+
+        .contact-info-text h3 {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info-text p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .contact-map {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            height: 16rem;
+            overflow: hidden;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .map-placeholder-icon {
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .map-placeholder-text {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .contact-form-wrapper {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            border: 1px solid #f3f4f6;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            ring: 2px solid rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #111827 0%, #1e3a8a 50%, #111827 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .footer-brand {
+                grid-column: span 1;
+            }
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-icon {
+            color: #60a5fa;
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-description {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            line-height: 1.625;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .footer-section h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #60a5fa;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-item-icon {
+            color: #60a5fa;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .contact-item-text {
+            color: #d1d5db;
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 9999;
+            animation: slide-in 0.3s ease-out;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .toast-icon {
+            flex-shrink: 0;
+        }
+
+        .toast-icon.success {
+            color: #10b981;
+        }
+
+        .toast-icon.error {
+            color: #ef4444;
+        }
+
+        .toast-message {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .services-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-container {
+                order: -1;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#hero" class="logo">
+                <i data-lucide="sparkles" class="logo-icon" width="32" height="32"></i>
+                <span class="logo-text">SPARK AI Hub</span>
+            </a>
+            
+            <nav>
+                <a href="#hero">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">AI Services</a>
+                <a href="#onboarding">Onboard</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <button class="mobile-menu-btn">
+                <i data-lucide="menu" width="24" height="24"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-background">
+            <img src="https://images.pexels.com/photos/8386437/pexels-photo-8386437.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="AI Technology">
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="sparkle-container" id="sparkleContainer"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">SPARK AI Hub</h1>
+            <div class="hero-divider">
+                <div class="hero-divider-line"></div>
+                <i data-lucide="sparkles" width="24" height="24" style="color: #60a5fa;"></i>
+                <div class="hero-divider-line"></div>
+            </div>
+            <h2 class="hero-subtitle">Sharjah's Innovation Center for Artificial Intelligence</h2>
+            <p class="hero-description">
+                Empowering innovation through cutting-edge AI technology, collaborative research, and entrepreneurial excellence
+            </p>
+            <div class="hero-buttons">
+                <a href="#onboarding" class="btn btn-primary">
+                    <span>Get Started</span>
+                    <i data-lucide="arrow-right" width="20" height="20"></i>
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    <span>Explore Services</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-box">
+                <div class="scroll-indicator-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="50" data-suffix="+">0+</div>
+                    <div class="stat-label">AI Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="100" data-suffix="+">0+</div>
+                    <div class="stat-label">Partnerships</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1000" data-suffix="+">0+</div>
+                    <div class="stat-label">Innovators</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="25" data-suffix="+">0+</div>
+                    <div class="stat-label">Research Labs</div>
+                </div>
+            </div>
+
+            <!-- About Content -->
+            <div class="about-grid">
+                <div class="about-image-container">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwzfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHxibHVlfDE3NzYxODg5MzN8MA&ixlib=rb-4.1.0&q=85" alt="SPARK AI Hub Facility">
+                        <div class="about-image-overlay"></div>
+                    </div>
+                    <div class="about-decorative-1"></div>
+                    <div class="about-decorative-2"></div>
+                </div>
+
+                <div class="about-content">
+                    <h2>About SPARK AI Hub</h2>
+                    <div class="about-content-divider"></div>
+                    
+                    <p>
+                        The SPARK AI Hub is Sharjah's premier innovation center dedicated to strengthening the emirate's technological leadership through advanced AI research, development, and collaboration.
+                    </p>
+                    
+                    <p class="mission-text">
+                        Our mission is to create a thriving ecosystem where innovation flourishes, supporting local talent, fostering cross-sector partnerships, and transforming AI possibilities into real-world solutions for a sustainable, knowledge-based economy.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" width="16" height="16"></i>
+                            </div>
+                            <span class="feature-text">State-of-the-art laboratories and research facilities</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" width="16" height="16"></i>
+                            </div>
+                            <span class="feature-text">Advanced AI and machine learning infrastructure</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" width="16" height="16"></i>
+                            </div>
+                            <span class="feature-text">Collaborative spaces for government, industry, and academia</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" width="16" height="16"></i>
+                            </div>
+                            <span class="feature-text">Comprehensive skills development programs</span>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" width="16" height="16"></i>
+                            </div>
+                            <span class="feature-text">Startup incubation and acceleration support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">AI Services & Solutions</h2>
+                <div class="section-divider">
+                    <div class="section-divider-line left"></div>
+                    <div class="section-divider-line right"></div>
+                </div>
+                <p class="section-description">
+                    Cutting-edge AI solutions and services tailored to drive innovation and transform your business
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Machine Learning">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="brain" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Machine Learning Solutions</h3>
+                        <p class="service-description">
+                            Advanced ML models and algorithms for predictive analytics, pattern recognition, and intelligent automation
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1607895232440-6ba075948c14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHw0fHx0ZWNobm9sb2d5JTIwZnV0dXJpc3RpY3xlbnwwfHx8Ymx1ZXwxNzc2MTg4OTM3fDA&ixlib=rb-4.1.0&q=85" alt="NLP">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="message-square" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Natural Language Processing</h3>
+                        <p class="service-description">
+                            Cutting-edge NLP solutions for text analysis, sentiment detection, chatbots, and language translation
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwyfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHxibHVlfDE3NzYxODg5MzN8MA&ixlib=rb-4.1.0&q=85" alt="Computer Vision">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="eye" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Computer Vision</h3>
+                        <p class="service-description">
+                            Image recognition, object detection, facial analysis, and visual data processing for diverse applications
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1535448674466-81707cbfe0f7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwzfHx0ZWNobm9sb2d5JTIwZnV0dXJpc3RpY3xlbnwwfHx8Ymx1ZXwxNzc2MTg4OTM3fDA&ixlib=rb-4.1.0&q=85" alt="Research">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="lightbulb" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">AI Research & Development</h3>
+                        <p class="service-description">
+                            Collaborative research programs exploring frontier AI technologies and their practical applications
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Training">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="graduation-cap" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">AI Training & Workshops</h3>
+                        <p class="service-description">
+                            Comprehensive training programs to upskill professionals and students in AI technologies
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwyfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHxibHVlfDE3NzYxODg5MzN8MA&ixlib=rb-4.1.0&q=85" alt="Consulting">
+                        <div class="service-image-overlay"></div>
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <i data-lucide="briefcase" width="24" height="24"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Innovation Consulting</h3>
+                        <p class="service-description">
+                            Strategic guidance for businesses to integrate AI solutions and drive digital transformation
+                        </p>
+                        <a href="#" class="service-link">
+                            <span>Learn More</span>
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Section -->
+    <section id="onboarding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How to Onboard With Us</h2>
+                <div class="section-divider">
+                    <div class="section-divider-line left"></div>
+                    <div class="section-divider-line right"></div>
+                </div>
+                <p class="section-description">
+                    Join SPARK AI Hub in four simple steps and start your innovation journey
+                </p>
+            </div>
+
+            <div class="onboarding-timeline">
+                <div class="timeline-step">
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-icon-wrapper">
+                        <i data-lucide="file-text" class="timeline-icon" width="40" height="40"></i>
+                        <div class="timeline-number">1</div>
+                    </div>
+                    <h3 class="timeline-title">Submit Your Interest</h3>
+                    <p class="timeline-description">
+                        Fill out our onboarding application form with your details and area of interest
+                    </p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-icon-wrapper">
+                        <i data-lucide="users" class="timeline-icon" width="40" height="40"></i>
+                        <div class="timeline-number">2</div>
+                    </div>
+                    <h3 class="timeline-title">Initial Consultation</h3>
+                    <p class="timeline-description">
+                        Our team will review your application and schedule a consultation to understand your needs
+                    </p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-icon-wrapper">
+                        <i data-lucide="clipboard-check" class="timeline-icon" width="40" height="40"></i>
+                        <div class="timeline-number">3</div>
+                    </div>
+                    <h3 class="timeline-title">Customized Plan</h3>
+                    <p class="timeline-description">
+                        We'll create a tailored collaboration plan based on your objectives and requirements
+                    </p>
+                </div>
+
+                <div class="timeline-step">
+                    <div class="timeline-icon-wrapper">
+                        <i data-lucide="rocket" class="timeline-icon" width="40" height="40"></i>
+                        <div class="timeline-number">4</div>
+                    </div>
+                    <h3 class="timeline-title">Start Innovating</h3>
+                    <p class="timeline-description">
+                        Begin your journey with access to our facilities, resources, and expert support
+                    </p>
+                </div>
+            </div>
+
+            <div class="application-cta">
+                <div class="application-card">
+                    <h3>Ready to Start Your Journey?</h3>
+                    <p>Click below to submit your application and join SPARK AI Hub's innovation community</p>
+                    <a href="https://ai.srtip.ae/#contact" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <span>Submit Application</span>
+                        <i data-lucide="check-circle-2" width="20" height="20"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="section-divider">
+                    <div class="section-divider-line left"></div>
+                    <div class="section-divider-line right"></div>
+                </div>
+                <p class="section-description">
+                    Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-cards">
+                    <div class="contact-info-card">
+                        <div class="contact-info-content">
+                            <div class="contact-icon-wrapper">
+                                <i data-lucide="map-pin" class="contact-icon" width="24" height="24"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h3>Visit Us</h3>
+                                <p>SPARK AI Hub, Sharjah Research Technology and Innovation Park, Sharjah, UAE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-info-content">
+                            <div class="contact-icon-wrapper">
+                                <i data-lucide="phone" class="contact-icon" width="24" height="24"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h3>Call Us</h3>
+                                <p>+971 XX XXX XXXX</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="contact-info-content">
+                            <div class="contact-icon-wrapper">
+                                <i data-lucide="mail" class="contact-icon" width="24" height="24"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <h3>Email Us</h3>
+                                <p>info@sparkaihub.ae</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-map">
+                        <div class="map-placeholder">
+                            <i data-lucide="map-pin" class="map-placeholder-icon" width="48" height="48"></i>
+                            <p class="map-placeholder-text">Sharjah, UAE</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <form id="contactForm" class="form-grid">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name *</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+971 XX XXX XXXX">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help?" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tell us more about your inquiry..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span>Send Message</span>
+                            <i data-lucide="send" width="20" height="20"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i data-lucide="sparkles" class="footer-logo-icon" width="32" height="32"></i>
+                        <span class="footer-logo-text">SPARK AI Hub</span>
+                    </div>
+                    <p class="footer-description">
+                        Sharjah's premier innovation center dedicated to advancing artificial intelligence, fostering collaboration, and driving technological excellence.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" width="20" height="20"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i data-lucide="twitter" width="20" height="20"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i data-lucide="facebook" width="20" height="20"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">AI Services</a></li>
+                        <li><a href="#onboarding">Onboarding</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin" class="contact-item-icon" width="20" height="20"></i>
+                        <span class="contact-item-text">SPARK AI Hub, Sharjah Research Technology and Innovation Park, Sharjah, UAE</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="phone" class="contact-item-icon" width="20" height="20"></i>
+                        <span class="contact-item-text">+971 XX XXX XXXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="mail" class="contact-item-icon" width="20" height="20"></i>
+                        <span class="contact-item-text">info@sparkaihub.ae</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> SPARK AI Hub, Sharjah. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Generate Sparkle Particles
+        const sparkleContainer = document.getElementById('sparkleContainer');
+        for (let i = 0; i < 30; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle-particle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+            sparkle.innerHTML = '<i data-lucide="sparkles" width="16" height="16"></i>';
+            sparkleContainer.appendChild(sparkle);
+        }
+        lucide.createIcons();
+
+        // Animated Counter
+        const counters = document.querySelectorAll('.stat-number');
+        let counterAnimated = false;
+
+        const animateCounters = () => {
+            if (counterAnimated) return;
+
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !counterAnimated) {
+                        counterAnimated = true;
+                        counters.forEach(counter => {
+                            const target = parseInt(counter.getAttribute('data-target'));
+                            const suffix = counter.getAttribute('data-suffix');
+                            const duration = 2000;
+                            const increment = target / (duration / 16);
+                            let current = 0;
+
+                            const updateCounter = () => {
+                                current += increment;
+                                if (current < target) {
+                                    counter.textContent = Math.floor(current) + suffix;
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    counter.textContent = target + suffix;
+                                }
+                            };
+
+                            updateCounter();
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(document.getElementById('about'));
+        };
+
+        animateCounters();
+
+        // Toast Notification Function
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i data-lucide="${type === 'success' ? 'check-circle' : 'x-circle'}" class="toast-icon ${type}" width="24" height="24"></i>
+                <span class="toast-message">${message}</span>
+            `;
+            document.body.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.classList.add('loading');
+            submitButton.querySelector('span').textContent = 'Sending...';
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showToast(data.message, 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error(data.detail || 'Something went wrong');
+                }
+            } catch (error) {
+                showToast(error.message || 'Something went wrong. Please try again.', 'error');
+            } finally {
+                submitButton.classList.remove('loading');
+                submitButton.querySelector('span').textContent = 'Send Message';
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set Current Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
